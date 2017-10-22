@@ -18,8 +18,8 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
 
     def lemmatize(self, word_class, full_form):
         """Return lemma for specified full form word of specified word class."""
-        rule = find_rule(self.rules, word_class, full_form)
-        predicted_lemma = apply_rule(rule, full_form)
+        rule = _find_rule(self.rules, word_class, full_form)
+        predicted_lemma = _apply_rule(rule, full_form)
         return predicted_lemma
 
     def fit(self, X, y, max_iteration: int = 20):
@@ -37,14 +37,15 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
                           time.time() - epoch_start)
             epoch += 1
         logging.debug("training complete: %s rules in %.2fs", rule_count, time.time() - train_start)
+        self._prune(X)
 
     def _count_rules(self):
         return sum(len(lemmas) for suffix_lookup in self.rules.values() for lemmas in suffix_lookup.values())
 
     def _train_epoch(self, X, y):
         for (word_class, full_form), lemma in zip(X, y):
-            rule = find_rule(self.rules, word_class, full_form)
-            predicted_lemmas = apply_rule(rule, full_form)
+            rule = _find_rule(self.rules, word_class, full_form)
+            predicted_lemmas = _apply_rule(rule, full_form)
 
             if lemma in predicted_lemmas:
                 # Current rules yield the correct lemma, so nothing to do.
@@ -78,6 +79,26 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
                 else:
                     self.rules[word_class][full_form_suffix] = [(lemma_suffix, True)]
 
+    def _prune(self, X):
+        logging.debug("rules before pruning: %s", self._count_rules())
+        used_rules = {}
+
+        for word_class, full_form in X:
+            full_form_suffix, lemmas = _find_rule(self.rules, word_class, full_form)
+            if full_form_suffix == "" and lemmas[0] == "":
+                continue
+            used_rules[word_class + "_" + full_form_suffix] = len(lemmas)
+
+        logging.debug("used rules: %s", sum(used_rules.values()))
+
+        for word_class, word_class_rules in self.rules.items():
+            full_form_suffixes = list(word_class_rules.keys())
+            for full_form_suffix in full_form_suffixes:
+                if word_class + "_" + full_form_suffix not in used_rules:
+                    word_class_rules.pop(full_form_suffix)
+
+        logging.debug("rules after pruning: %s", self._count_rules())
+
 
 def _build_rule(lemma, full_form, min_rule_length):
     assert min_rule_length < len(full_form)
@@ -98,7 +119,7 @@ def _build_rule(lemma, full_form, min_rule_length):
     return full_form_suffix, lemma_suffix
 
 
-def find_rule(rules, word_class, full_form):
+def _find_rule(rules, word_class, full_form):
     """Find the rule with the longest full form suffix matching specified full form and class."""
     best = ("", [""])
     if word_class not in rules:
@@ -115,7 +136,7 @@ def find_rule(rules, word_class, full_form):
     return best
 
 
-def apply_rule(rule, full_form):
+def _apply_rule(rule, full_form):
     """
     Apply specified rule to specified full form.
 
