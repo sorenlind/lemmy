@@ -33,19 +33,24 @@
     "python.autoComplete.addBrackets": true,
     "python.autoComplete.preloadModules": ["numpy", "scipy", "pandas"],
 
+    // Linting and formatting
     // whitelist numpy to remove lint errors
     "python.linting.pylintArgs": [
         "--extension-pkg-whitelist=numpy",
         "--ignored-classes=optparse.Values,thread._local,_thread._local,NpzFile"
     ],
-
     "python.linting.mypyEnabled": true,
+
+    "python.linting.pep8Enabled": true,
+    "python.linting.pep8Path": "pycodestyle",
+    "python.linting.pydocstyleEnabled": true,
 
     "python.formatting.yapfArgs": [
         "--style",
         "{column_limit: 120}"
     ],
 
+    // Testing
     "python.unitTest.pyTestEnabled": true,
     "python.unitTest.pyTestArgs": [
         "--exitfirst",
