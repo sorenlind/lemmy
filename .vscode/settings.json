@@ -1,0 +1,80 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+    "[markdown]": {
+        "editor.formatOnSave": true,
+        "editor.wordWrap": "on",
+        "editor.renderWhitespace": "all",
+        "editor.acceptSuggestionOnEnter": "off"
+    },
+
+    "debug.inlineValues": true,
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.mypy_cache": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": true,
+        "**/*.bak": true,
+        "**/__pycache__": true,
+        "**/.cache": true,
+        "**/.tox": true,
+        "**/*.egg-info": true,
+        "**/.eggs" : true,
+        "**/.ropeproject": true
+    },
+    "editor.rulers": [
+        120
+    ],
+    "editor.quickSuggestions": true,
+    "editor.wordWrap": "off",
+
+    "python.autoComplete.addBrackets": true,
+    "python.autoComplete.preloadModules": ["numpy", "scipy", "pandas"],
+
+    // whitelist numpy to remove lint errors
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=numpy",
+        "--ignored-classes=optparse.Values,thread._local,_thread._local,NpzFile"
+    ],
+
+    "python.linting.mypyEnabled": true,
+
+    "python.formatting.yapfArgs": [
+        "--style",
+        "{column_limit: 120}"
+    ],
+
+    "python.unitTest.pyTestEnabled": true,
+    "python.unitTest.pyTestArgs": [
+        "--exitfirst",
+        "--verbose"
+    ],
+
+    "cSpell.ignorePaths": [
+        "requirements.txt",
+        "**/.vscode",
+        ".env",
+        "settings.json"
+    ],
+    "cSpell.enabledLanguageIds": [
+        "c",
+        "cpp",
+        "csharp",
+        "go",
+        "handlebars",
+        "javascript",
+        "javascriptreact",
+        "json",
+        "latex",
+        "php",
+        "plaintext",
+        "python",
+        "restructuredtext",
+        "text",
+        "typescript",
+        "typescriptreact",
+        "yml"
+    ]
+}
