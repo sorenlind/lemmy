@@ -14,4 +14,4 @@ notifications:
     rooms:
       secure: DY9tyBDt+LERcVbdnIDRFa8HP+rs2onbHtBU0JOl6DRaiafcGDIZhl2VnOZF4p0EQg7iZ7yv6Q4ucsBp+W3kN8xokmMrjxd0yH6G+PPbozGo3UqmT7BsbN4povkfjEFiUxcLeuYzLS0KVJVyUWPMJ7pgWq7WmUKJOcVmrmr5dZwVxjMJ0kvqjhbS/8GZddYWAXrVYxv4vpV3uRblksofPzBGx0LdBjgv+0faBkBMgKlkVUrj2G1Mp/yBn9xd8cY6ucbNGVpkxjB3zHJjwxcfXiC739ipHa1ygsUIXTxrDIXMDBOPaLgF2UC37Et0bW2pQ63v5G8rd001vsyxMxTYCuOJHZLE3nsUUh+/Fs5pJqIl/nPdDJGFuhtXlSptSgHPvOHG3Rx9FzlrNn5yL/Gf0kijcWwB1plrnUpN9jC36p4JhrlxiETvbCWmSbkVwgdqc7A4nzHASmCYb9EJdSMNV8dzy+GTYQ3Zuh5Z/4VKD6PGdjkekdLVRdWPjEUpB8TlHag988kl90yJRNICHipSR5LwApsvZe5hLAucnPnweEHEf2eC2CKLkXK5zs50QEeTE/K2eigkHFQkTbhJ5NuZLBUMZSOQJIg0tLgaLTD1IwGblrKroLBqd2QhJvAFKy16s4mKELPikuvwOrrcU7MqZINkdZVcSdphyHvnbVDqIZc=
     template:
-      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>: %{commit_message}) of %{repository}@%{branch} by %{author} %{result} in %{duration}"
+      - "Build <%{build_url}|#%{build_number}> (<%{compare_url}|%{commit}>) of %{repository}@%{branch} by %{author} %{result} in %{duration}. Subject: %{commit_subject}"
