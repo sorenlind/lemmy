@@ -5,6 +5,7 @@
 import pytest
 
 from lemma import Lemmatizer
+from lemma.lemmatizer import _find_suffix_start
 
 
 @pytest.fixture
@@ -47,3 +48,13 @@ class TestTraining(object):
             assert isinstance(actual_lemmas, list)
             assert len(actual_lemmas) == len(expected_lemmas)
             assert actual_lemmas == expected_lemmas
+
+    @pytest.mark.parametrize("test_input,expected", [
+        (("adelsmændene", "adelsmand", 4), 6),
+        (("A'erne", "A", 1), 1)
+    ])
+    def test_find_suffix_start(self, test_input, expected):
+        """Test splitting of full form to prefix and suffix."""
+        full_form, lemma, min_rule_length = test_input
+        actual = _find_suffix_start(full_form, lemma, min_rule_length)
+        assert actual == expected
