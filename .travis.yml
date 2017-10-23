@@ -1,0 +1,14 @@
+sudo: false
+language: python
+python:
+- '3.6'
+install:
+- pip install .
+- pip install pytest
+- pip install docutils
+script:
+- python setup.py check --restructuredtext -s
+- python setup.py test
+notifications:
+  slack:
+    secure: sPA7FqCRo9FXmewe+x5fXIlxhX7RWz8W6O8ugiOcF7rG1gnvbgJCM4Pj+CcncSAU+A+4YWERQ9VIBAL+YngzWEnFsOAIChTM8kqNIes3LJR1Bq04GkACIaemJJ6JK8FButzINDLpgs8tdkE15JbfXkCpX2i/d0Y8SBD1u/YdGu1lQv28f8S8kd4in28KbhCbrPV44ADjf2+psOoAPm+Ii6SuxDl5h/pOWj2O0ykCpW0sF8eW53BJERujct4JmFHYd0neAMHhcWYBKdb8Tu9k4W27ZZ7/FZDGmfbw+1v8Vmk6+4zM4tBcypPIn8jrtf5T8SpzE9dI2oP7NQIqDeOWI0DZwOBcpM2m8GiGLXQX1rvzzk5hfFMdbVVy1B2VD7jmJ03NAmHdNRUsYIWJjBZRYTvkqY+a8T1kudy+rugCfZ4icdriESPdEty5efgYT1NAAFt9+gd9rbPIQYnan4Z/uE9Nvf9tRMUrMOd9LvDDW+a80JypJrGx70oyNbqE+8CEEIlve18vnDzXgw5SRhsfXqxuwD39RMcQbHvqtUKHSCaimS84RnCmjIyGluNaSRRlfxmZmoa8MA7MPlmYfFOwWVJFzIuth5lbYv1eF9FkgXOkr+m2g0x9NshXmocZ3eN+PTtKTKtmn1JPG33QudurWwrScsLX3MHr2hDX2sTfj6A=
