@@ -6,7 +6,7 @@ import time
 
 
 class Lemmatizer(object):  # pylint: disable=too-few-public-methods
-    """Class for lemmatizing words."""
+    """Class for lemmatizing words. Inpsired by the CST lemmatizer."""
 
     def __init__(self, rules=None):
         """Initialize a lemmatizer using specified set of rules."""

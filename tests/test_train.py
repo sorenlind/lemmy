@@ -4,14 +4,18 @@
 
 import pytest
 
-from lemma import Lemmatizer
+from lemma import Lemmatizer, SimpleLemmatizer
 from lemma.lemmatizer import _find_suffix_start
 
 
-@pytest.fixture
-def empty_lemmatizer():
-    """Return empty (untrained) lemmatizer."""
-    return Lemmatizer()
+@pytest.fixture(scope="module", params=["full", "simple"])
+def lemmatizer(request):
+    """Build either a simple (spaCy-like) or full (CST-like) empty lemmatizer."""
+    if request.param == "full":
+        return Lemmatizer()
+    elif request.param == "simple":
+        return SimpleLemmatizer()
+    raise Exception()
 
 
 def _prepare(data):
@@ -27,27 +31,27 @@ class TestTraining(object):
     """Test class for training a lemmatizer."""
 
     @pytest.mark.parametrize("train,test", [
-        ([('sb.', 'skaber', 'skaber'), ('sb.', 'venskaber', 'venskab')],
-         [('sb.', 'skaber', ['skaber']), ('sb.', 'venskaber', ['venskab'])]),
+        ([('noun', 'skaber', 'skaber'), ('noun', 'venskaber', 'venskab')],
+         [('noun', 'skaber', ['skaber']), ('noun', 'venskaber', ['venskab'])]),
 
-        ([('sb.', 'skab', 'skab'), ('sb.', 'skaber', 'skaber'), ('sb.', 'venskaber', 'venskab')],
-         [('sb.', 'skab', ['skab']), ('sb.', 'skaber', ['skaber']), ('sb.', 'venskaber', ['venskab'])]),
+        ([('noun', 'skab', 'skab'), ('noun', 'skaber', 'skaber'), ('noun', 'venskaber', 'venskab')],
+         [('noun', 'skab', ['skab']), ('noun', 'skaber', ['skaber']), ('noun', 'venskaber', ['venskab'])]),
 
-        ([('sb.', 'alen', 'alen'), ('sb.', 'alen', 'ale')],
-         [('sb.', 'alen', ['alen', 'ale']), ('sb.', 'alen', ['alen', 'ale'])]),
+        ([('noun', 'alen', 'alen'), ('noun', 'alen', 'ale')],
+         [('noun', 'alen', ['alen', 'ale']), ('noun', 'alen', ['alen', 'ale'])]),
 
-        ([('sb.', 'alen', 'ale'), ('sb.', 'alen', 'alen')],
-         [('sb.', 'alen', ['alen', 'ale']), ('sb.', 'alen', ['alen', 'ale'])])
+        ([('noun', 'alen', 'ale'), ('noun', 'alen', 'alen')],
+         [('noun', 'alen', ['alen', 'ale']), ('noun', 'alen', ['alen', 'ale'])])
         ])
-    def test_fit(self, empty_lemmatizer, train, test):
+    def test_fit(self, lemmatizer, train, test):
         """Test training on small datasets."""
         X, y = _prepare(train)
-        empty_lemmatizer.fit(X, y)
+        lemmatizer.fit(X, y)
         for word_class, full_form, expected_lemmas in test:
-            actual_lemmas = empty_lemmatizer.lemmatize(word_class, full_form)
+            actual_lemmas = lemmatizer.lemmatize(word_class, full_form)
             assert isinstance(actual_lemmas, list)
             assert len(actual_lemmas) == len(expected_lemmas)
-            assert actual_lemmas == expected_lemmas
+            assert set(actual_lemmas) == set(expected_lemmas)
 
     @pytest.mark.parametrize("test_input,expected", [
         (("adelsmændene", "adelsmand", 4), 6),
