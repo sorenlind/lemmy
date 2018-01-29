@@ -6,23 +6,85 @@ import time
 
 
 class SimpleLemmatizer(object):
-    """Class for lemmatizing Danish words. Inpsired by the spaCy lemmatizer."""
+    """Class for lemmatizing Danish words. Inspired by the spaCy lemmatizer."""
 
     def __init__(self, exceptions=None):
         """Initialize a lemmatizer using specified set of exceptions."""
         self.exceptions = exceptions
         self.rules = {
-            "adj": [],
+            "adj": [
+                ["mle", "mmel"],
+                ["elt", "el"],
+                ["mme", "m"],
+                ["øst", "øs"],
+                ["ede", "et"],
+                ["ngt", "ng"],
+                ["dt", "d"],
+                ["lle", "l"],
+                ["igt", "ig"],
+                ["tte", "t"],
+                ["ist", "is"],
+                ["ivt", "iv"],
+                ["rit", "ri"],
+                ["vne", "ven"],
+                ["alt", "al"],
+                ["nne", "n"],
+                ["rt", "r"],
+                ["kne", "ken"],
+                ["ent", "en"],
+                ["øjt", "øj"],
+                ["ønt", "øn"],
+                ["sne", "ssen"],
+                ["ilt", "il"],
+                ["rkt", "rk"],
+                ["blåt", "blå"],
+                ["gne", "gen"],
+                ["ldne", "lden"],
+                ["adne", "aden"],
+                ["dne", "dden"],
+                ["ble", "bel"],
+                ["bne", "ben"],
+                ["tne", "ten"],
+                ["ppe", "p"],
+                ["lt", "l"],
+                ["somt", "som"],
+                ["e", ""]],
             "adv": [],
             "verb": [["ede", "e"], ["re", "re"], ["te", "e"], ["er", "e"], ["dt", "de"], ["st", "se"], ["t", ""]],
             "noun": [
+                ["numre", "nummer"],
+                ["derne", "de"],
+                ["ttet", "t"],
+                ["alen", "ale"],
+                ["ejde", "ejde"],
+                ["ale", "ale"],
+                ["strene", "ster"],
+                ["dlet", "ddel"],
+                ["lykker", "lykke"],
+                ["møde", "møde"],
+                ["rykket", "ryk"],
+                ["stret", "ster"],
+                ["sret", "sret"],
+                ["nner", "n"],
+                ["nnerne", "n"],
+                ["asken", "aske"],
+                ["aske", "aske"],
+                ["ttene", "t"],
+                ["iker", "iker"],
+                ["kerne", "ker"],
+                ["tter", "t"],
+                ["lser", "lse"],
+                ["llerne", "lle"],
+                ["llene", "l"],
+                ["lgerne", "lger"],
+                ["unger", "unge"],
+                ["mænd", "mand"],
                 ["erne", ""],
                 ["ene", ""],
                 ["et", ""],
                 ["en", ""],
                 ["er", ""],
-                ["e", ""],
-            ]
+                ["e", ""]]
         }
 
     def fit(self, X, y):
