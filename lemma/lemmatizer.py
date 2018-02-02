@@ -116,6 +116,11 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
         logging.debug("rules after pruning: %s (%s removed)", post_prune_count, pre_prune_count - post_prune_count)
 
 
+def load():
+    from lemma.rules import rules as default_rules
+    return Lemmatizer(default_rules)
+
+
 def _create_rule(full_form, lemma, current_rule_length):
     if current_rule_length >= len(full_form) - 1:
         # The current longest matching rule is at least as long as the full form minus one character. Thus, building
