@@ -6,7 +6,7 @@ import time
 
 
 class Lemmatizer(object):  # pylint: disable=too-few-public-methods
-    """Class for lemmatizing words. Inpsired by the CST lemmatizer."""
+    """Class for lemmatizing words. Inspired by the CST lemmatizer."""
 
     def __init__(self, rules=None):
         """Initialize a lemmatizer using specified set of rules."""
@@ -43,7 +43,7 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
             rule = _longest_matching_rule(self.rules, word_class, full_form)
             predicted_lemmas = _apply_rule(rule, full_form)
 
-            if lemma in predicted_lemmas:
+            if len(predicted_lemmas) == 1 and lemma in predicted_lemmas:
                 # Current rules yield the correct lemma, so nothing to do.
                 continue
 
@@ -52,24 +52,32 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
             current_rule_length = len(rule[0])
             full_form_suffix, lemma_suffix, exhausted = _create_rule(full_form, lemma, current_rule_length)
 
-            if not exhausted:
+            if exhausted:
+                # New rule exhausts full form, meaning we may or may not have an existing rule with the new full
+                # form suffix.
+                if not self._full_form_suffix_locked(word_class, full_form_suffix):
+                    # Existing rules for the full form suffix (if there are any) are not locked. So we remove them
+                    # and replace them with the new rule.
+                    self.rules[word_class][full_form_suffix] = [(lemma_suffix, True)]
+                elif not self._rule_exists(word_class, full_form_suffix, lemma_suffix):
+                    self.rules[word_class][full_form_suffix] += [(lemma_suffix, True)]
+            else:
                 # New rule does not exhaust full form, meaning we are not using the complete full form for suffix.
                 # Therefore it's safe to assume the new rule is longer than previous matching rule, and subsequently
                 # that no rules with the new suffix exist. And so, we don't have to consider existing rules.
-                self.rules[word_class][full_form_suffix] = [(lemma_suffix, exhausted)]
-            else:
-                # New rule exhausts full form, meaning we may or may not have an existing rule with the new suffix.
-                # If we have existing rules and they are locked, we will keep them. Otherwise we will clear existing
-                # rules (if any).
-                if not self._locked_rule_exists(word_class, full_form_suffix):
-                    self.rules[word_class][full_form_suffix] = []
-                self.rules[word_class][full_form_suffix] += [(lemma_suffix, True)]
+                self.rules[word_class][full_form_suffix] = [(lemma_suffix, False)]
 
-    def _locked_rule_exists(self, word_class, full_form_suffix):
+    def _full_form_suffix_locked(self, word_class, full_form_suffix):
         rules_list = self.rules[word_class][full_form_suffix]
         if not rules_list:
             return False
         return rules_list[0][1]
+
+    def _rule_exists(self, word_class, full_form_suffix, lemma_suffix):
+        rules_list = self.rules[word_class][full_form_suffix]
+        if not rules_list:
+            return False
+        return lemma_suffix in (lemma_suffix_ for (lemma_suffix_, _) in rules_list)
 
     def _prune(self, X):
         pre_prune_count = self._count_rules()
