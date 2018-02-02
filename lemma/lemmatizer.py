@@ -12,11 +12,25 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
         """Initialize a lemmatizer using specified set of rules."""
         self.rules = rules
 
-    def lemmatize(self, word_class, full_form):
+    def lemmatize(self, word_class, full_form, pos_previous=None):
         """Return lemma for specified full form word of specified word class."""
         rule = _longest_matching_rule(self.rules, word_class, full_form)
-        predicted_lemma = _apply_rule(rule, full_form)
-        return predicted_lemma
+        predicted_lemmas = _apply_rule(rule, full_form)
+
+        if len(predicted_lemmas) == 1:
+            # No ambiguity, just return the prediction.
+            return predicted_lemmas
+
+        if pos_previous is None:
+            # No history specified, so we can't avoid ambiguity.
+            return predicted_lemmas
+
+        if pos_previous + "_" + word_class not in self.rules:
+            # History not found, so we can't avoid ambiguity.
+            return predicted_lemmas
+
+        # Lemmatize using history.
+        return self.lemmatize(pos_previous + "_" + word_class, full_form, pos_previous=None)
 
     def fit(self, X, y, max_iteration: int = 20):
         """Train a lemmatizer on specified training data."""
