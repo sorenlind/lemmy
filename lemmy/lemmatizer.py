@@ -117,7 +117,7 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
 
 
 def load():
-    from lemma.rules import rules as default_rules
+    from lemmy.rules import rules as default_rules
     return Lemmatizer(default_rules)
 
 

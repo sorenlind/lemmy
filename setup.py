@@ -2,20 +2,20 @@
 import re
 from setuptools import setup, find_packages
 
-VERSION = re.search(r'^VERSION\s*=\s*"(.*)"', open("lemma/version.py").read(), re.M).group(1)
+VERSION = re.search(r'^VERSION\s*=\s*"(.*)"', open("lemmy/version.py").read(), re.M).group(1)
 
 with open("README.md", "rb") as f:
     LONG_DESCRIPTION = f.read().decode("utf-8")
 
 setup(
-    name="lemma",
+    name="lemmy",
     version=VERSION,
     description="Package for automatic lemmatization of Danish words.",
     long_description=LONG_DESCRIPTION,
     author="Soren Lind Kristiansen",
     author_email="sorenlind@mac.com",
-    url="https://github.com/fraggle-inc/lemma/",
-    keywords="natural language processing danish",
+    url="https://github.com/fraggle-inc/lemmy/",
+    keywords="natural language processing danish lemmatizer lemmatiser",
     platforms=["Any"],
     packages=find_packages(),
     include_package_data=True,

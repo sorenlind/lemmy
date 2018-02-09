@@ -1,7 +1,7 @@
 # coding: utf8
 """A spaCy pipeline component."""
-from lemma import Lemmatizer
-from lemma.rules import rules as default_rules
+from lemmy import Lemmatizer
+from lemmy.rules import rules as default_rules
 from spacy.tokens import Token
 from spacy.symbols import PRON_LEMMA
 

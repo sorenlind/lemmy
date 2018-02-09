@@ -4,8 +4,8 @@
 
 import pytest
 
-from lemma import Lemmatizer, SimpleLemmatizer
-from lemma.lemmatizer import _find_suffix_start
+from lemmy import Lemmatizer, SimpleLemmatizer
+from lemmy.lemmatizer import _find_suffix_start
 
 
 @pytest.fixture(scope="module", params=["full", "simple"])
