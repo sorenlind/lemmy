@@ -6,6 +6,7 @@ install:
 - pip install .
 - pip install pytest
 - pip install docutils
+- pip install pygments
 script:
 - python setup.py check --restructuredtext -s
 - python setup.py test
