@@ -23,7 +23,7 @@ setup(
     zip_safe=False,
     setup_requires=['pytest-runner'],
     tests_require=['pytest'],
-    install_requires=['pandas', 'pytest'],
+    install_requires=[],
     dependency_links=[],
     classifiers=[
         "Development Status :: 3 - Alpha",
