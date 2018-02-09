@@ -2,8 +2,6 @@
 """A spaCy pipeline component."""
 from lemmy import Lemmatizer
 from lemmy.rules import rules as default_rules
-from spacy.tokens import Token
-from spacy.symbols import PRON_LEMMA
 
 
 class LemmaPipelineComponent(object):
@@ -49,4 +47,6 @@ class LemmaPipelineComponent(object):
 
 
 def load_pipeline_component():
+    from spacy.tokens import Token
+    from spacy.symbols import PRON_LEMMA
     return LemmaPipelineComponent(default_rules)
