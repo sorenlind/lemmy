@@ -5,10 +5,9 @@ python:
 install:
 - pip install .
 - pip install pytest
-- pip install docutils
-- pip install pygments
+- pip install readme_renderer
 script:
-- python setup.py check --restructuredtext -s
+- python setup.py check -r -s
 - python setup.py test
 notifications:
   slack:
