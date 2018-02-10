@@ -36,14 +36,14 @@ Usage
 .. code:: python
 
     import da_custom_model as da # name of your spaCy model
-    import lemma
+    import lemmy.pipe
     nlp = da.load()
 
     # create an instance of Lemmy's pipeline component for spaCy
-    component = lemma.load_pipeline_component()
+    pipe = lemmy.pipe.load()
 
     # add the comonent to the spaCy pipeline.
-    nlp.add_pipe(component, after='tagger')
+    nlp.add_pipe(pipe, after='tagger')
 
     # lemmas can now be accessed using the `._.lemma` attribute on the tokens
     nlp("akvariernes")[0]._.lemma

@@ -2,16 +2,18 @@
 """A spaCy pipeline component."""
 from lemmy import Lemmatizer
 from lemmy.rules import rules as default_rules
+from spacy.tokens import Token
+from spacy.symbols import PRON_LEMMA
 
 
-class LemmaPipelineComponent(object):
+class LemmyPipelineComponent(object):
     """
     A pipeline component for spaCy.
 
     This wraps a trained lemmatizer for easy use with spaCy.
     """
 
-    name = 'lemma'
+    name = 'lemmy'
 
     def __init__(self, rules):
         """Initialize a pipeline component instance."""
@@ -46,7 +48,5 @@ class LemmaPipelineComponent(object):
         return lemmas[0]
 
 
-def load_pipeline_component():
-    from spacy.tokens import Token
-    from spacy.symbols import PRON_LEMMA
-    return LemmaPipelineComponent(default_rules)
+def load():
+    return LemmyPipelineComponent(default_rules)
