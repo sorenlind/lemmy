@@ -28,7 +28,7 @@ Install
 
 .. code:: bash
 
-    pip3 install lemmy
+    pip install lemmy
 
 Usage
 -----
