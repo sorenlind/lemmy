@@ -3,32 +3,34 @@ import re
 from setuptools import setup, find_packages
 
 VERSION = re.search(r'^VERSION\s*=\s*"(.*)"', open("lemmy/version.py").read(), re.M).group(1)
-
 with open("README.rst", "rb") as f:
     LONG_DESCRIPTION = f.read().decode("utf-8")
 
 setup(
     name="lemmy",
     version=VERSION,
-    description="Package for automatic lemmatization of Danish words.",
+    description="Lemmatizer for Danish",
     long_description=LONG_DESCRIPTION,
     author="Soren Lind Kristiansen",
     author_email="sorenlind@mac.com",
-    url="https://github.com/fraggle-inc/lemmy/",
+    url="https://github.com/sorenlind/lemmy/",
     keywords="natural language processing danish lemmatizer lemmatiser",
-    platforms=["Any"],
     packages=find_packages(),
-    include_package_data=True,
-    package_data={},
-    zip_safe=False,
-    setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
     install_requires=[],
-    dependency_links=[],
+    extras_require={
+        'notebooks': ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex'],
+        'dev':
+        ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'pylint', 'pycodestyle', 'pydocstyle', 'yapf'],
+        'test': ['pytest', 'tox'],
+    },
     classifiers=[
-        "Development Status :: 3 - Alpha",
-        "Environment :: Console",
-        "Operating System :: OS Independent",
+        'Development Status :: 3 - Alpha',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: MIT License',
+        'Natural Language :: Danish',
+        'Operating System :: OS Independent',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
+        'Topic :: Text Processing :: Linguistic'
     ])
