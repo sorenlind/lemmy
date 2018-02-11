@@ -21,7 +21,7 @@ setup(
         'notebooks': ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'spacy'],
         'dev': [
             'pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'spacy', 'pylint', 'pycodestyle', 'pydocstyle',
-            'yapf'
+            'yapf', 'pytest', 'tox'
         ],
         'test': ['pytest', 'tox'],
     },
