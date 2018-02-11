@@ -4,18 +4,13 @@
 
 import pytest
 
-from lemmy import Lemmatizer, SimpleLemmatizer
+import lemmy
 from lemmy.lemmatizer import _find_suffix_start
 
 
-@pytest.fixture(scope="module", params=["full", "simple"])
+@pytest.fixture(scope="module")
 def lemmatizer(request):
-    """Build either a simple (spaCy-like) or full (CST-like) empty lemmatizer."""
-    if request.param == "full":
-        return Lemmatizer()
-    elif request.param == "simple":
-        return SimpleLemmatizer()
-    raise Exception()
+    return lemmy.load()
 
 
 def _prepare(data):
