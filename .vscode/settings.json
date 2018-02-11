@@ -34,6 +34,12 @@
     "python.autoComplete.preloadModules": ["numpy", "scipy", "pandas"],
 
     // Linting and formatting
+    "python.linting.enabled": true,
+    "python.linting.ignorePatterns": [
+        ".vscode/*.py",
+        "**/site-packages/**/*.py",
+        "lemmy/rules.py"
+    ],
     // whitelist numpy to remove lint errors
     "python.linting.pylintArgs": [
         "--extension-pkg-whitelist=numpy",
