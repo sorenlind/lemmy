@@ -32,7 +32,7 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
         # Lemmatize using history.
         return self.lemmatize(pos_previous + "_" + word_class, full_form, pos_previous=None)
 
-    def fit(self, X, y, max_iteration: int = 20):
+    def fit(self, X, y, max_iteration=20):
         """Train a lemmatizer on specified training data."""
         self.rules = defaultdict(lambda: defaultdict(lambda: []))
         old_rule_count = -1

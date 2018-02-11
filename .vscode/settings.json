@@ -39,7 +39,7 @@
         "--extension-pkg-whitelist=numpy",
         "--ignored-classes=optparse.Values,thread._local,_thread._local,NpzFile"
     ],
-    "python.linting.mypyEnabled": true,
+    "python.linting.mypyEnabled": false,
 
     "python.linting.pep8Enabled": true,
     "python.linting.pep8Path": "pycodestyle",
