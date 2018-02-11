@@ -18,9 +18,11 @@ setup(
     packages=find_packages(),
     install_requires=[],
     extras_require={
-        'notebooks': ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex'],
-        'dev':
-        ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'pylint', 'pycodestyle', 'pydocstyle', 'yapf'],
+        'notebooks': ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'spacy'],
+        'dev': [
+            'pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'spacy', 'pylint', 'pycodestyle', 'pydocstyle',
+            'yapf'
+        ],
         'test': ['pytest', 'tox'],
     },
     setup_requires=['pytest-runner'],
