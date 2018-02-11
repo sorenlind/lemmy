@@ -23,6 +23,8 @@ setup(
         ['pandas', 'jupyter', 'unicodecsv', 'bs4', 'tqdm', 'regex', 'pylint', 'pycodestyle', 'pydocstyle', 'yapf'],
         'test': ['pytest', 'tox'],
     },
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest'],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
