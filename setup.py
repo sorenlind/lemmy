@@ -14,7 +14,7 @@ setup(
     author="Soren Lind Kristiansen",
     author_email="sorenlind@mac.com",
     url="https://github.com/sorenlind/lemmy/",
-    keywords="natural language processing danish lemmatizer lemmatiser",
+    keywords="nlp lemma lemmatizer lemmatiser danish spacy",
     packages=find_packages(),
     install_requires=[],
     extras_require={
