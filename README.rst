@@ -7,7 +7,7 @@ Dependencies and is ready for use. Lemmy also supports training on your
 own dataset.
 
 The model currently included in Lemmy was evaluated on the Danish
-Universal Dependencies dev dataset and scored an accruacy > 99%.
+Universal Dependencies dev dataset and scored an accuracy > 99%.
 
 You can use Lemmy as a spaCy extension, more specifcally a spaCy
 pipeline component. This is highly recommended and makes the lemmas
