@@ -17,6 +17,7 @@ class TestRules(object):
     """Test class for rules shipping with Lemmy."""
 
     @pytest.mark.parametrize("test_input,expected", [
+        (("NOUN", "mobilen"), ["mobil", "mobile"]),
         (("NOUN", "adelsmændene"), ["adelsmand"]),
         (("NOUN", "gymnasium"), ["gymnasie"]),
         (("NOUN", "alen"), ["alen", "ale", "al"]),
