@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """A few simple tests for the built-in rules shipping with Lemmy."""
 # pylint: disable=protected-access,too-many-public-methods,no-self-use,too-few-public-methods,redefined-outer-name
 from __future__ import unicode_literals

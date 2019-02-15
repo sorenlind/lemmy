@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """Functions for lemmatizing using a set of lemmatization rules."""
 from collections import defaultdict
 import logging

@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """A spaCy pipeline component."""
 from lemmy import Lemmatizer
 from lemmy.rules import rules as default_rules
