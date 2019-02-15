@@ -18,10 +18,10 @@ class LemmyPipelineComponent(object):
     def __init__(self, rules):
         """Initialize a pipeline component instance."""
         self._internal = Lemmatizer(rules)
-        self._lemma = 'lemma'
+        self._lemmas = 'lemmas'
 
         # Add attributes
-        Token.set_extension(self._lemma, default=None)
+        Token.set_extension(self._lemmas, default=None)
 
     def __call__(self, doc):
         """
@@ -32,20 +32,18 @@ class LemmyPipelineComponent(object):
         """
         for token in doc:
             if token.lemma_ == PRON_LEMMA:
-                lemma = PRON_LEMMA
+                lemmas = [PRON_LEMMA]
             else:
-                lemma = self._get_lemma(token)
+                lemmas = self._get_lemmas(token)
 
-            if not lemma:
+            if not lemmas:
                 continue
-            token._.set(self._lemma, lemma)
+            token._.set(self._lemmas, lemmas)
         return doc
 
-    def _get_lemma(self, token):
+    def _get_lemmas(self, token):
         lemmas = self._internal.lemmatize(token.pos_, token.text)
-        if len(lemmas) != 1:
-            return None
-        return lemmas[0]
+        return lemmas
 
 
 def load():

@@ -45,8 +45,8 @@ Usage
     # add the comonent to the spaCy pipeline.
     nlp.add_pipe(pipe, after='tagger')
 
-    # lemmas can now be accessed using the `._.lemma` attribute on the tokens
-    nlp("akvariernes")[0]._.lemma
+    # lemmas can now be accessed using the `._.lemmas` attribute on the tokens
+    nlp("akvariernes")[0]._.lemmas
 
 Training
 --------
