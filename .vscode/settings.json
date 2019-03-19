@@ -31,14 +31,13 @@
     "editor.wordWrap": "off",
 
     "python.autoComplete.addBrackets": true,
-    "python.autoComplete.preloadModules": ["numpy", "scipy", "pandas"],
 
     // Linting and formatting
     "python.linting.enabled": true,
     "python.linting.ignorePatterns": [
         ".vscode/*.py",
         "**/site-packages/**/*.py",
-        "lemmy/rules.py"
+        "lemmy/rules/*.py"
     ],
     // whitelist numpy to remove lint errors
     "python.linting.pylintArgs": [
@@ -61,31 +60,5 @@
     "python.unitTest.pyTestArgs": [
         "--exitfirst",
         "--verbose"
-    ],
-
-    "cSpell.ignorePaths": [
-        "requirements.txt",
-        "**/.vscode",
-        ".env",
-        "settings.json"
-    ],
-    "cSpell.enabledLanguageIds": [
-        "c",
-        "cpp",
-        "csharp",
-        "go",
-        "handlebars",
-        "javascript",
-        "javascriptreact",
-        "json",
-        "latex",
-        "php",
-        "plaintext",
-        "python",
-        "restructuredtext",
-        "text",
-        "typescript",
-        "typescriptreact",
-        "yml"
     ]
 }

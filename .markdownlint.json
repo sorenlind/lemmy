@@ -1,9 +1,9 @@
 {
     "default": true,
-    "MD003": { "style": "setext_with_atx_closed" },
+    "MD003": { "style": "atx" },
     "MD007": { "indent": 4 },
+    "MD013": { "line_length": 88 },
     "no-hard-tabs": true,
-    "line-length": false,
     "blanks-around-headers": false,
     "ol-prefix": {"style": "ordered" }
 }
