@@ -3,7 +3,7 @@ import re
 from setuptools import setup, find_packages
 
 VERSION = re.search(r'^VERSION\s*=\s*"(.*)"', open("lemmy/version.py").read(), re.M).group(1)
-with open("README.rst", "rb") as f:
+with open("README.md", "rb") as f:
     LONG_DESCRIPTION = f.read().decode("utf-8")
 
 setup(
@@ -11,6 +11,7 @@ setup(
     version=VERSION,
     description="Lemmatizer for Danish",
     long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/markdown",
     author="Soren Lind Kristiansen",
     author_email="sorenlind@mac.com",
     url="https://github.com/sorenlind/lemmy/",

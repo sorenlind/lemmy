@@ -4,11 +4,12 @@ python:
 - '2.7'
 - '3.6'
 install:
+- pip install --upgrade setuptools wheel twine
 - pip install .
 - pip install pytest
-- pip install readme_renderer
 script:
-- python setup.py check -r -s
+- python setup.py sdist bdist_wheel
+- twine check dist/*
 - python setup.py test
 notifications:
   slack:
