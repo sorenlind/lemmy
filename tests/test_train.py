@@ -1,4 +1,4 @@
-# coding: utf8
+# coding: utf-8
 """Tests for training a lemmatizer."""
 # pylint: disable=protected-access,too-many-public-methods,no-self-use,too-few-public-methods,redefined-outer-name
 
@@ -10,7 +10,7 @@ from lemmy.lemmatizer import _find_suffix_start
 
 @pytest.fixture(scope="module")
 def lemmatizer(request):
-    return lemmy.load()
+    return lemmy.load("da")
 
 
 def _prepare(data):

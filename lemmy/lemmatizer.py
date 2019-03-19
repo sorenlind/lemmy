@@ -116,9 +116,22 @@ class Lemmatizer(object):  # pylint: disable=too-few-public-methods
         logging.debug("rules after pruning: %s (%s removed)", post_prune_count, pre_prune_count - post_prune_count)
 
 
-def load():
-    from lemmy.rules import rules as default_rules
-    return Lemmatizer(default_rules)
+def load(language):
+    """Load lemmatizer for specified language."""
+    lookup = {'da': _load_da, 'sv': _load_sv}
+    if language not in lookup:
+        raise ValueError("Language not supported.")
+    return lookup[language]()
+
+
+def _load_da():
+    from lemmy.rules.da import rules as da_rules
+    return Lemmatizer(da_rules)
+
+
+def _load_sv():
+    from lemmy.rules.sv import rules as sv_rules
+    return Lemmatizer(sv_rules)
 
 
 def _create_rule(full_form, lemma, current_rule_length):

@@ -1,9 +1,9 @@
 # coding: utf-8
 """A spaCy pipeline component."""
-from lemmy import Lemmatizer
-from lemmy.rules import rules as default_rules
-from spacy.tokens import Token
 from spacy.symbols import PRON_LEMMA
+from spacy.tokens import Token
+
+from lemmy.lemmatizer import load as load_lemmatizer
 
 
 class LemmyPipelineComponent(object):
@@ -15,9 +15,9 @@ class LemmyPipelineComponent(object):
 
     name = 'lemmy'
 
-    def __init__(self, rules):
+    def __init__(self, language):
         """Initialize a pipeline component instance."""
-        self._internal = Lemmatizer(rules)
+        self._internal = load_lemmatizer(language)
         self._lemmas = 'lemmas'
 
         # Add attributes
@@ -46,5 +46,5 @@ class LemmyPipelineComponent(object):
         return lemmas
 
 
-def load():
-    return LemmyPipelineComponent(default_rules)
+def load(language):
+    return LemmyPipelineComponent(language)

@@ -10,7 +10,7 @@ import lemmy
 
 @pytest.fixture(scope="module")
 def lemmatizer(request):
-    return lemmy.load()
+    return lemmy.load("da")
 
 
 class TestRules(object):

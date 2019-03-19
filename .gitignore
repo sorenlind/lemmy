@@ -123,4 +123,4 @@ ds-env2.7/
 .vscode/*.sql
 
 # Generated files
-notebooks/data
+notebooks/*/data
