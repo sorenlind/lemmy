@@ -56,8 +56,8 @@
     ],
 
     // Testing
-    "python.unitTest.pyTestEnabled": true,
-    "python.unitTest.pyTestArgs": [
+    "python.testing.pyTestEnabled": true,
+    "python.testing.pyTestArgs": [
         "--exitfirst",
         "--verbose"
     ]
