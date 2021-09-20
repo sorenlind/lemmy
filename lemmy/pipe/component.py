@@ -8,7 +8,7 @@ from lemmy.lemmatizer import load as load_lemmatizer
 
 @Language.factory("lemmy")
 def create_lemmy_component(nlp, name):
-    return LemmyPipelineComponent(name, nlp)
+    return LemmyPipelineComponent(name, nlp.lang)
 
 
 class LemmyPipelineComponent(object):
@@ -18,11 +18,10 @@ class LemmyPipelineComponent(object):
     This wraps a trained lemmatizer for easy use with spaCy.
     """
 
-    def __init__(self, name, nlp):
+    def __init__(self, name, lang):
         """Initialize a pipeline component instance."""
         self.name = name
-        self.nlp = nlp
-        self._internal = load_lemmatizer(self.nlp.lang)
+        self._internal = load_lemmatizer(lang)
         self._lemmas = "lemmas"
 
         # Add attributes
